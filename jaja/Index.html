@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Andravian - Sistema de Riego Creativo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="read.js"></script>
+
+</head>
+
+<body>
+  <header class="header">
+    <div class="logo">Andra<span>vian</span></div>
+    <nav class="navbar">
+      <ul>
+        <li><a href="read.html" class="btn-intuitive"><i class="fas fa-database"></i> Consultar Datos</a></li>
+        <li><a href="excel.html" class="btn-intuitive"><i class="fas fa-cloud"></i> Descargas</a></li>
+        <li><a href="graficas.html" class="btn-intuitive"><i class="fas fa-chart-bar"></i> Gráficas</a></li>
+      </ul>
+    </nav>
+  </header>
+
+ 
+  <section class="hero section-bg-1 full-width">
+    <div class="hero-text">
+      <h1>Sistema de Riego</h1>
+      <p>Proyecto elaborado por un equipo piola: abraham, Julian, David y Andres</p>
+      <a href="#porque" class="btn-primary btn-large"><i class="fas fa-leaf"></i> Descubre más sobre nuestro proyecto </a>
+    </div>
+    <figure class="hero-image" aria-label="Planta decorativa">
+      <img src="images/WhatsApp Image 2025-06-12 at 10.24.33 PM (1).jpeg" alt="Planta decorativa" loading="lazy" />
+    </figure>
+  </section>
+
+
+
+  <div class="separador"></div>
+ 
+ 
+  <section class="info-video section-bg-2 full-width">
+    <div class="info-text">
+      <h2>Esta pagina..</h2>
+      <p>Fue diseñada para monitorear los datos de nuestro sistema de riego </p>
+      <a href="read.html" class="btn-primary btn-medium"><i class="fas fa-eye"></i> Ver Datos</a>
+    </div>
+
+    <div class="video-wrapper">
+      <video controls preload="metadata" muted>
+        <source src="images/6014849_Flower_Garden_3840x2160.mp4" type="video/mp4" />
+        Tu navegador no soporta la etiqueta de video.
+      </video>
+    </div>
+  </section>
+
+  
+  <section class="slider-section section-bg-3 full-width" id="porque" aria-label="¿Por qué elegirnos?">
+    <h2>imagenes del proceso de elaboracion de nuestro dispocitivo </h2>
+    <div class="slider-container">
+      <div class="slider">
+        <article class="slide-item" style="background-image: url('images/joker.jpg');" tabindex="0">
+          
+        </article>
+        <article class="slide-item" style="background-image: url('images/im1.jpeg');" tabindex="0">
+          
+        </article>
+        <article class="slide-item" style="background-image: url('images/im2.jpeg');" tabindex="0">
+         
+        </article>
+        <article class="slide-item" style="background-image: url('images/im3.jpeg');" tabindex="0">
+         
+        </article>
+        <article class="slide-item" style="background-image: url('images/im4.jpeg');" tabindex="0">
+          
+        </article>
+
+        <article class="slide-item" style="background-image: url('images/im5.jpeg');" tabindex="0">
+          
+        </article>
+
+        <article class="slide-item" style="background-image: url('images/im6.jpeg');" tabindex="0">
+          
+        </article>
+
+        <article class="slide-item" style="background-image: url('images/im7.jpeg');" tabindex="0">
+          
+        </article>
+      </div>
+
+      <div class="slider-buttons">
+        <button aria-label="Anterior" class="slider-prev"><i class="fa-solid fa-arrow-left"></i></button>
+        <button aria-label="Siguiente" class="slider-next"><i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer section-bg-4">
+    <div class="footer-logo">Andra<span>vian</span></div>
+    <p>© 2025 Todos los derechos reservados a Andravian.</p>
+    <h3 class="footer-title-ig">IG de los guapos 😘 ↓</h3>
+    <ul class="footer-nav">
+      <li><a href="https://www.instagram.com/abrahanrl_24?igsh=MXZtMXpxMWNiNTY3NQ==" target="_blank"><i class="fab fa-instagram"></i> Guapo 1</a></li>
+      <li><a href="https://www.instagram.com/josebaez7215?igsh=MTd3cnJyMzZoemI1bg==" target="_blank"><i class="fab fa-instagram"></i> Guapo 2</a></li>
+      <li><a href="https://www.instagram.com/d4vidzn_7?igsh=MWM5MWZibmgyaTE0eA==" target="_blank"><i class="fab fa-instagram"></i> Guapo 3</a></li>
+      <li><a href="https://www.instagram.com/nah._scott?igsh=dzJvaDMxaW05dGdk" target="_blank"><i class="fab fa-instagram"></i> Guapo 4</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    const slider = document.querySelector('.slider');
+    const nextBtn = document.querySelector('.slider-next');
+    const prevBtn = document.querySelector('.slider-prev');
+
+    nextBtn.addEventListener('click', () => {
+      slider.style.transition = 'transform 0.5s ease-in-out';
+      slider.style.transform = 'translateX(-100%)';
+      slider.addEventListener('transitionend', () => {
+        slider.appendChild(slider.firstElementChild);
+        slider.style.transition = 'none';
+        slider.style.transform = 'translateX(0)';
+      }, { once: true });
+    });
+
+    prevBtn.addEventListener('click', () => {
+      slider.style.transition = 'none';
+      slider.insertBefore(slider.lastElementChild, slider.firstElementChild);
+      slider.style.transform = 'translateX(-100%)';
+      requestAnimationFrame(() => {
+        slider.style.transition = 'transform 0.5s ease-in-out';
+        slider.style.transform = 'translateX(0)';
+      });
+    });
+  </script>
+</body>
+</html>

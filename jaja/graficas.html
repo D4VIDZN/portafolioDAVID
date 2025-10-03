@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gráficas</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<link rel="stylesheet" href="style.css">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+
+
+    header h2 {
+      font-size: 32px;
+      margin: 0 0 10px;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 16px;
+      opacity: 0.9;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #777;
+      margin-top: 60px;
+    }
+
+
+    h1-t {
+      text-align: center;
+      padding: 30px 0 20px;
+      color: #2e7d32;
+      font-size: 30px;
+      margin: 0;
+      background-color: #a5d6a7;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+
+    header-E {
+      background: linear-gradient(135deg, #43a047, #66bb6a);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    header-E h1 {
+      font-size: 32px;
+      margin: 0 0 10px;
+    }
+
+    header-E p {
+      margin: 0;
+      font-size: 16px;
+      opacity: 0.9;
+    }
+
+  </style>
+</head>
+
+
+<body>
+  <header class="header">
+    <div class="logo">Andra<span>vian</span></div>
+    <nav class="navbar">
+      <ul>
+        <li><a href="read.html" class="btn-intuitive"><i class="fas fa-database"></i> Consultar Datos</a></li>
+        <li><a href="excel.html" class="btn-intuitive"><i class="fas fa-cloud"></i> Descargas</a></li>
+        <li><a href="graficas.html" class="btn-intuitive"><i class="fas fa-chart-bar"></i> Gráficas</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section class="hero section-bg-1 full-width">
+    <div class="hero-text">
+      <h1 class="h">Sistema de Riego</h1>
+      <p>Proyecto elaborado por un equipo piola: abraham, Julian, David y Andres</p>
+      <a href="#porque" class="btn-primary btn-large"><i class="fas fa-leaf"></i> Descubre más sobre nuestro proyecto </a>
+    </div>
+    <figure class="hero-image" aria-label="Planta decorativa">
+      <img src="images/WhatsApp Image 2025-06-12 at 10.24.33 PM (1).jpeg" alt="Planta decorativa" loading="lazy" />
+    </figure>
+  </section>
+
+  <div class="separador"></div>
+    <header-E>
+    <h1>Graficas</h1>
+  </header-E>
+
+
+  <a href="Index.html"><button class="boton-regresar">Atras</button></a>
+  <div class="contenedor">
+
+    <div class="grafica-box">
+      <div class="grafica-header">Gráfico del campo 1</div>
+      <div class="grafica-body">
+        <div id="grafica_temp" style="width:100%; height:300px;"></div>
+      </div>
+    </div>
+
+    <div class="grafica-box">
+      <div class="grafica-header">Gráfico del campo 2</div>
+      <div class="grafica-body">
+        <div id="grafica_hum" style="width:100%; height:300px;"></div>
+      </div>
+    </div>
+
+    <div class="grafica-box">
+      <div class="grafica-header">Gráfico del campo 3</div>
+      <div class="grafica-body">
+        <div id="grafica_suel" style="width:100%; height:300px;"></div>
+      </div>
+    </div>
+
+    <div class="grafica-box">
+      <div class="grafica-header">Gráfico del campo 4</div>
+      <div class="grafica-body">
+        <div id="grafica_lluvia" style="width:100%; height:300px;"></div>
+      </div>
+    </div>
+
+    <div class="grafica-box">
+      <div class="grafica-header">Gráfico del campo 5</div>
+      <div class="grafica-body">
+        <div id="grafica_nivel" style="width:100%; height:300px;"></div>
+      </div>
+    </div>
+
+    <div class="grafica-box">
+      <div class="grafica-header">Gráfico del campo 6</div>
+      <div class="grafica-body">
+        <div id="grafica_luz" style="width:100%; height:300px;"></div>
+      </div>
+    </div>
+    
+  </div>
+  <footer>
+    &copy; 2025 Sistema de Riego - Andravian.
+  </footer>
+
+  <script>
+    const channelID = "2987035";
+    const apiKey = "DR3CKV912GFROVC2";
+    const maxPoints = 200;
+
+    async function obtenerDatos() {
+      const url = `https://api.thingspeak.com/channels/${channelID}/feeds.json?results=${maxPoints}&api_key=${apiKey}`;
+      const respuesta = await fetch(url);
+      const datos = await respuesta.json();
+      const feeds = datos.feeds;
+
+      const tiempos = feeds.map(e => e.created_at.slice(11, 19));
+      const temperatura = feeds.map(e => parseFloat(e.field1));
+      const humedad = feeds.map(e => parseFloat(e.field2));
+      const suelo = feeds.map(e => parseFloat(e.field3));
+      const lluvia = feeds.map(e => parseFloat(e.field4));
+      const nivel = feeds.map(e => parseFloat(e.field5));
+      const luz = feeds.map(e => parseFloat(e.field6));
+
+      return { tiempos, temperatura, humedad, suelo, lluvia, nivel, luz };
+    }
+
+    async function graficar() {
+      const { tiempos, temperatura, humedad, suelo, lluvia, nivel, luz } = await obtenerDatos();
+
+      Plotly.newPlot("grafica_temp", [{
+        x: tiempos, y: temperatura, mode: "lines+markers", line: { color: "#d62020" }, name: "Temperatura"
+      }], { title: "Temperatura", xaxis: { title: "Hora" }, yaxis: { title: "°C" } });
+
+      Plotly.newPlot("grafica_hum", [{
+        x: tiempos, y: humedad, mode: "lines+markers", line: { color: "#1f77b4" }, name: "Humedad"
+      }], { title: "Humedad Ambiente", xaxis: { title: "Hora" }, yaxis: { title: "%" } });
+
+      Plotly.newPlot("grafica_suel", [{
+        x: tiempos, y: suelo, mode: "lines+markers", line: { color: "#2ca02c" }, name: "Humedad Suelo"
+      }], { title: "Humedad del Suelo", xaxis: { title: "Hora" }, yaxis: { title: "%" } });
+
+      Plotly.newPlot("grafica_lluvia", [{
+        x: tiempos, y: lluvia, mode: "lines+markers", line: { color: "#9467bd" }, name: "Lluvia"
+      }], { title: "Nivel de Lluvia", xaxis: { title: "Hora" }, yaxis: { title: "mm" } });
+
+      Plotly.newPlot("grafica_nivel", [{
+        x: tiempos, y: nivel, mode: "lines+markers", line: { color: "#ff7f0e" }, name: "Nivel de Agua"
+      }], { title: "Nivel de Agua", xaxis: { title: "Hora" }, yaxis: { title: "cm" } });
+
+      Plotly.newPlot("grafica_luz", [{
+        x: tiempos, y: luz, mode: "lines+markers", line: { color: "#8c564b" }, name: "Luz"
+      }], { title: "Luz Ambiental", xaxis: { title: "Hora" }, yaxis: { title: "Lux" } });
+    }
+
+    async function actualizar() {
+      const { tiempos, temperatura, humedad, suelo, lluvia, nivel, luz } = await obtenerDatos();
+
+      Plotly.update("grafica_temp", { x: [tiempos], y: [temperatura] });
+      Plotly.update("grafica_hum", { x: [tiempos], y: [humedad] });
+      Plotly.update("grafica_suel", { x: [tiempos], y: [suelo] });
+      Plotly.update("grafica_lluvia", { x: [tiempos], y: [lluvia] });
+      Plotly.update("grafica_nivel", { x: [tiempos], y: [nivel] });
+      Plotly.update("grafica_luz", { x: [tiempos], y: [luz] });
+    }
+
+    graficar();
+    setInterval(actualizar, 15000);
+  </script>
+</body>
+</html>
+

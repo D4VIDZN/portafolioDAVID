@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Descargar datos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+  <script defer src="excel.js"></script>
+
+  
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: #f0f4f8;
+      color: #2c3e50;
+      animation: fadeIn 0.6s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    header-E {
+      background: linear-gradient(135deg, #43a047, #66bb6a);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    header-E h1 {
+      font-size: 32px;
+      margin: 0 0 10px;
+    }
+
+    header-E p {
+      margin: 0;
+      font-size: 16px;
+      opacity: 0.9;
+    }
+
+    main {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 30px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      text-align: center;
+      position: relative;
+    }
+
+    label {
+      display: inline-block;
+      margin: 20px 30px;
+      font-weight: bold;
+      font-size: 15px;
+      color: #333;
+    }
+
+    input[type="date"] {
+      margin-top: 10px;
+      padding: 10px 12px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="date"]:focus {
+      border-color: #66bb6a;
+      outline: none;
+    }
+
+    .btn-group {
+      margin-top: 40px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.4s ease;
+      pointer-events: none;
+    }
+
+    .btn-group.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    button {
+      margin: 12px;
+      padding: 12px 28px;
+      border: none;
+      background-color: #43a047;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+    }
+
+    button:hover {
+      background-color: #388e3c;
+      transform: translateY(-2px);
+    }
+
+    .error-msg {
+      color: #d32f2f;
+      font-size: 14px;
+      margin-top: 20px;
+      display: none;
+    }
+
+    .error-msg.visible {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #777;
+      margin-top: 60px;
+    }
+
+    @media (max-width: 600px) {
+      label {
+        display: block;
+        margin: 25px auto;
+      }
+
+      input[type="date"] {
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .btn-group {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      button {
+        width: 90%;
+        max-width: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">Andra<span>vian</span></div>
+    <nav class="navbar">
+      <ul>
+        <li><a href="read.html" class="btn-intuitive"><i class="fas fa-database"></i> Consultar Datos</a></li>
+        <li><a href="excel.html" class="btn-intuitive"><i class="fas fa-cloud"></i> Descargas</a></li>
+        <li><a href="graficas.html" class="btn-intuitive"><i class="fas fa-chart-bar"></i> Gráficas</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section class="hero section-bg-1 full-width">
+    <div class="hero-text">
+      <h1>Sistema de Riego</h1>
+      <p>Proyecto elaborado por un equipo piola: abraham, Julian, David y Andres</p>
+      <a href="#porque" class="btn-primary btn-large"><i class="fas fa-leaf"></i> Descubre más sobre nuestro proyecto </a>
+    </div>
+    <figure class="hero-image" aria-label="Planta decorativa">
+      <img src="images/WhatsApp Image 2025-06-12 at 10.24.33 PM (1).jpeg" alt="Planta decorativa" loading="lazy" />
+    </figure>
+  </section>
+
+  <div class="separador"></div>
+
+  <header-E>
+    <h1>Descargar Datos</h1>
+    <p>Da una fecha para descargar tu archivo </p>
+  </header-E>
+
+  <main>
+    <label>
+      Fecha de inicio:<br>
+      <input type="date" id="fechaInicio">
+    </label>
+
+    <label>
+      Fecha de fin:<br>
+      <input type="date" id="fechaFin">
+    </label>
+    <div class="btn-group" id="botones">
+      <a href="Index.html"> <button>Atras</button></a>
+      <button onclick="descargarExcel()">Descargar Excel</button>
+      <button onclick="descargarPDF()">Descargar PDF</button>
+    </div>
+
+    <div class="error-msg" id="mensajeError">⚠️ Selecciona ambas fechas válidas para continuar.</div>
+  </main>
+
+  <footer>
+    &copy; 2025 Sistema de Riego - Andravian.
+  </footer>
+
+  <script>
+    const fechaInicio = document.getElementById('fechaInicio');
+    const fechaFin = document.getElementById('fechaFin');
+    const botones = document.getElementById('botones');
+    const mensajeError = document.getElementById('mensajeError');
+
+    function validarFechas() {
+      const inicio = fechaInicio.value;
+      const fin = fechaFin.value;
+      const valido = inicio && fin && inicio <= fin;
+
+      if (valido) {
+        botones.classList.add('visible');
+        mensajeError.classList.remove('visible');
+        return true;
+      } else {
+        botones.classList.remove('visible');
+        mensajeError.classList.add('visible');
+        return false;
+      }
+    }
+
+    fechaInicio.addEventListener('change', validarFechas);
+    fechaFin.addEventListener('change', validarFechas);
+  </script>
+</body>
+</html>
+

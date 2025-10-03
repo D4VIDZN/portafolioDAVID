@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Datos de ThingSpeak</title>
+  <script src="read.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    
+
+    h1 {
+      text-align: center;
+      color: #2e7d32;
+      margin-bottom: 20px;
+    }
+
+    .header-E {
+      background: linear-gradient(135deg, #43a047, #66bb6a);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .header-E h1 {
+      font-size: 32px;
+      margin: 0 0 10px;
+       color: white;
+    }
+
+    .header-E p {
+      margin: 0;
+      font-size: 16px;
+      opacity: 0.9;
+    }
+    .container {
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      max-width: 100%;
+      margin: auto
+      ;
+    }
+
+    .boton-consultar {
+      display: block;
+      margin: 0 auto 20px auto;
+      background-color: #43a047;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .boton-regresar {
+      display: block;
+      margin: 0 auto 20px auto;
+      background-color: #43a047;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+
+   input[type="date"] {
+      margin: 10px;
+      padding: 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      border: 1px solid #c8e6c9;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #a5d6a7;
+      color: #1b5e20;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f1f8e9;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #777;
+      margin-top: 60px;
+    }
+
+     
+  </style>
+</head>
+<body>
+  
+  <header class="header">
+    <div class="logo">Andra<span>vian</span></div>
+    <nav class="navbar">
+      <ul>
+        <li><a href="read.html" class="btn-intuitive"><i class="fas fa-database"></i> Consultar Datos</a></li>
+        <li><a href="excel.html" class="btn-intuitive"><i class="fas fa-cloud"></i> Descargas</a></li>
+        <li><a href="graficas.html" class="btn-intuitive"><i class="fas fa-chart-bar"></i> Gráficas</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section class="hero section-bg-1 full-width">
+    <div class="hero-text">
+      <h1>Sistema de Riego</h1>
+      <p>Proyecto elaborado por un equipo piola: abraham, Julian, David y Andres</p>
+      <a href="#porque" class="btn-primary btn-large"><i class="fas fa-leaf"></i> Descubre más sobre nuestro proyecto </a>
+    </div>
+    <figure class="hero-image" aria-label="Planta decorativa">
+      <img src="images/WhatsApp Image 2025-06-12 at 10.24.33 PM (1).jpeg" alt="Planta decorativa" loading="lazy" />
+    </figure>
+  </section>
+
+  <div class="separador"></div>
+ 
+<div class="header-E">
+  <h1>Mostrar Datos</h1>
+  <p>Da una fecha para que te muestre los datos </p>
+</div>
+
+
+  <div class="separador"></div>
+  <div class="container">
+    <label>Desde: <input type="date" id="fechaInicio"></label>
+    <label>Hasta: <input type="date" id="fechaFin"></label>
+    <button class="boton-consultar" onclick="consultar()">Consultar Datos</button>
+    <a href="Index.html"><button class="boton-consultar"> Atras</button></a>
+    <h1>Lectura de Datos</h1>
+    
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th>Fecha/Hora</th>
+          <th>Temperatura</th>
+          <th>Humedad Ambiente</th>
+          <th>Humedad Suelo</th>
+          <th>Lluvia</th>
+          <th>Nivel de Agua</th>
+          <th>Luz Ambiental</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    
+  </div>
+  <footer>
+    &copy; 2025 Sistema de Riego - Andravian.
+  </footer>
+</body>
+</html>
+
