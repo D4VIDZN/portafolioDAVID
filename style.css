@@ -1,0 +1,269 @@
+/* Variables y Reseteo Básico */
+:root {
+    --primary-color: #007BFF;
+    --secondary-color: #333;
+    --background-color: #f4f4f9;
+    --text-color: #333;
+    --card-background: #ffffff;
+    --project-highlight: #43a047; /* Color de énfasis para el proyecto Andravian (verde) */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background: var(--background-color);
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+/* Encabezado */
+header {
+    background: var(--secondary-color);
+    color: #fff;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    float: left;
+}
+
+header nav {
+    float: right;
+}
+
+header ul {
+    list-style: none;
+}
+
+header ul li {
+    display: inline;
+    padding: 0 20px;
+}
+
+header ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Secciones y Estilos Generales */
+section {
+    padding: 60px 0;
+}
+
+section:nth-child(even) {
+    background: #e9e9e9;
+}
+
+h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--primary-color);
+}
+
+.hero {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: var(--card-background);
+    flex-direction: column; 
+}
+
+.hero h2 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.btn {
+    display: inline-block;
+    background: var(--primary-color);
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #0056b3;
+}
+
+/* Estilos de Proyectos */
+#proyectos .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 30px;
+}
+
+.project-card {
+    background: var(--card-background);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 45%; 
+    transition: transform 0.3s;
+    border-left: 5px solid var(--primary-color);
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+/* ESTILO ESPECÍFICO para la tarjeta de proyecto principal */
+.project-card.large-card {
+    width: 100%; /* Ocupa todo el ancho para la descripción detallada */
+    border-left: 8px solid var(--project-highlight); /* Borde de color verde */
+}
+
+.project-card.large-card h3 {
+    color: var(--project-highlight);
+}
+
+/* Contenido dentro de la tarjeta */
+.project-card ul {
+    margin-top: 10px;
+    list-style-type: disc;
+    padding-left: 20px;
+}
+.project-card h4 {
+    margin-top: 15px;
+    color: var(--secondary-color);
+}
+
+
+.project-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.technologies {
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
+.project-card .links a {
+    margin-right: 15px;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Estilo para el botón principal de la demo */
+.project-card .links a.main-link {
+    background-color: var(--project-highlight);
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.project-card .links a.main-link:hover {
+    background-color: #388e3c; 
+}
+
+
+/* Estilos de Habilidades */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    text-align: center;
+}
+
+.skill-item h4 {
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.skill-item ul {
+    list-style-type: none;
+}
+
+.skill-item li {
+    background: var(--primary-color);
+    color: #fff;
+    margin: 5px 0;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+/* Estilos de Contacto */
+#contacto {
+    text-align: center;
+    background: var(--secondary-color);
+    color: #fff;
+}
+
+#contacto a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.social-links a {
+    font-size: 1.2rem;
+    margin: 0 10px;
+    display: inline-block;
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: var(--primary-color);
+}
+
+/* Pie de Página */
+footer {
+    background: var(--secondary-color);
+    color: #ccc;
+    text-align: center;
+    padding: 15px 0;
+    border-top: 1px solid #444;
+}
+
+/* Media Queries (para hacerlo responsive) */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+
+    header h1, header nav {
+        float: none;
+        text-align: center;
+    }
+
+    header nav ul li {
+        padding: 0 10px;
+        display: block;
+    }
+
+    .project-card {
+        width: 100%;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+}
