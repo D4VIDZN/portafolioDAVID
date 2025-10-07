@@ -1,3 +1,18 @@
+# Arquitectura Propuesta: Gestión de Eventos Universitarios (Capas)
+
+## Estilo Elegido: Arquitectura por Capas
+
+El diseño se basa en la separación estricta de responsabilidades en cuatro niveles: Presentación, Lógica de Negocio, Acceso a Datos y Persistencia. Esto maximiza la mantenibilidad y la testabilidad del sistema.
+
+### Componentes Clave
+
+1.  **Capa de Presentación:** Controladores API y la interfaz de usuario (web/móvil).
+2.  **Capa de Lógica de Negocio:** Contiene las reglas clave (ej: límites de aforo, permisos de inscripción).
+3.  **Capa de Acceso a Datos (DAL):** Repositorios que gestionan la comunicación con la base de datos.
+4.  **Capa de Datos:** Almacenamiento persistente (ej: PostgreSQL).
+
+### Diagrama de Flujo Arquitectónico
+
 ```mermaid
 graph TD
     subgraph Cliente
